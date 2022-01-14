@@ -1,0 +1,34 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	    background-color: hsl(208deg 55% 6%);
+}
+
+.score-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+span {
+	color: white;
+	font-size: 24px;
+	font-family: sans-serif;
+}
+
+#ai,
+#player {
+	margin: 6px 12px;
+}
+
+canvas {
+	border: 2px solid white;
+	background-color: #4fe14f;
+}
