@@ -169,20 +169,20 @@ function collisionTest(rect, ballObject){
 		testY = rect.y + rect.height;
     }
 	
-	let distX = ballObject.x - testX;
+    let distX = ballObject.x - testX;
     let distY = ballObject.y - testY;
     let distance = Math.sqrt((distX * distX) + (distY * distY));
 	
-	if (distance <= ballObject.rad){
-        if (Math.abs(distX) > Math.abs(distY)){
-			direction = distX > 0 ? "right" : "left";
+    if (distance <= ballObject.rad){
+    	if (Math.abs(distX) > Math.abs(distY)){
+		direction = distX > 0 ? "right" : "left";
         }
         else if (Math.abs(distY) > Math.abs(distX)){
             direction = distY > 0 ? "down" : "top";
         }
-    }
+     }
 	
-	return direction;
+     return direction;
 }
 
 
