@@ -226,7 +226,7 @@ const resultNode = document.getElementById("result");
 const updateScore = (node, score) => node.innerText = score;
 const showResult = (text) => {
 	resultNode.innerText = `${text} Win!!`;
-	setInterval(() => {resultNode.innerText = "";}, 1000);
+	setTimeout(() => {resultNode.innerText = "";}, 1000);
 }
 
 
