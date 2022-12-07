@@ -1,6 +1,14 @@
 # js-Pong-Game
-> Developed using the Canvas API.<br>
-> *_NOTE_* Only tested in Chrome.
+Javascript Canvas API kullanarak geliştirdiğim ping-pong oyunu
 
-## Screenshot
+### Kullandığım teknolojiler
+* HTML
+* CSS
+* Javascript
+* Canvas API
+
+
+
+
+## Ekran Görüntüsü
 ![Screenshot](pong_screenshot.png)
