@@ -9,7 +9,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-	    background-color: hsl(208deg 55% 6%);
+	background-color: hsl(208deg 55% 6%);
 }
 
 .score-container {
@@ -17,10 +17,11 @@ body {
 	justify-content: space-between;
 }
 
-span {
+p {
 	color: white;
 	font-size: 24px;
 	font-family: sans-serif;
+	margin-bottom: .5rem;
 }
 
 #ai,
