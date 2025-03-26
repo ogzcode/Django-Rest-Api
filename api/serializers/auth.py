@@ -26,8 +26,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
     def validate_company(self, value):
-        if Company.objects.filter(user=self.context['request'].user).exists():
-            raise serializers.ValidationError("Company already exists")
+        if self.context.get('request') and self.context['request'].user.id:
+            if Company.objects.filter(user=self.context['request'].user).exists():
+                raise serializers.ValidationError("Company already exists")
         return value
     
 class RegisterResponseSerializer(serializers.ModelSerializer):
