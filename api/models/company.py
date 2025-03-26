@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib import admin
 
 class Company(models.Model):
     name = models.CharField(max_length=200)
@@ -11,7 +12,7 @@ class Company(models.Model):
     website = models.URLField(max_length=200)
     tax_office = models.CharField(max_length=200)
     tax_number = models.CharField(max_length=200)
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -20,3 +21,7 @@ class Company(models.Model):
         db_table = 'companies'
 
 
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'address', 'city', 'district', 'phone', 'email', 'website', 'tax_office', 'tax_number', 'user')
+    search_fields = ('name', 'address', 'city', 'district', 'phone', 'email', 'website', 'tax_office', 'tax_number', 'user' )
+    list_filter = ('name', 'address', 'city', 'district', 'phone', 'email', 'website', 'tax_office', 'tax_number', 'user')
