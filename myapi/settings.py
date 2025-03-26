@@ -76,6 +76,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # React/Vue vs. frontend uygulamanızın URL'si
 ]
 
+APPEND_SLASH=False
+
 ROOT_URLCONF = 'myapi.urls'
 
 TEMPLATES = [
