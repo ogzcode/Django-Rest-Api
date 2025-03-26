@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { getCRMToken } from '@/config/tokenConfig'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -8,23 +8,30 @@ const router = createRouter({
             component: () => import('@/views/auth/Login.vue'),
         },
         {
+            path: '/register',
+            component: () => import('@/views/auth/Register.vue'),
+        },
+        {
             path: '/',
-            component: () => import('@/App.vue'),
+            component: () => import('@/views/main/Dashboard.vue'),
         },
     ],
 })
 
 
-router.beforeEach((to, from, next) => {
-    const token = localStorage.getItem('django-crm-token')
-    if (to.path === '/login' && token) {
-        next({ path: '/' })
+router.beforeEach(async (to, from, next) => {
+    const token = await getCRMToken()
+    if (to.path === '/login' && token?.access) {
+        return next({ path: '/' })
     }
-    if (to.path === '/login' && !token) {
-        next()
+    if (to.path === '/register' && token?.access) {
+        return next({ path: '/' })
     }
-    if (to.path === '/' && !token) {
-        next({ path: '/login' })
+    if (to.path === '/login' && !token?.access) {
+        return next()
+    }
+    if (to.path === '/' && !token?.access) {
+        return next({ path: '/login' })
     }
     next()
 })
