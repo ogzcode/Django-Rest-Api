@@ -22,6 +22,14 @@ class Company(models.Model):
 
 
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'address', 'city', 'district', 'phone', 'email', 'website', 'tax_office', 'tax_number', 'user')
-    search_fields = ('name', 'address', 'city', 'district', 'phone', 'email', 'website', 'tax_office', 'tax_number', 'user' )
-    list_filter = ('name', 'address', 'city', 'district', 'phone', 'email', 'website', 'tax_office', 'tax_number', 'user')
+    list_display = ('id', 'name', 'address', 'city', 'district', 'phone', 'email', 'website', 'tax_office', 'tax_number', 'user_id')
+    search_fields = ('id', 'name', 'address', 'city', 'district', 'phone', 'email', 'website', 'tax_office', 'tax_number', 'user_id' )
+    list_filter = ('id', 'name', 'address', 'city', 'district', 'phone', 'email', 'website', 'tax_office', 'tax_number', 'user_id')
+
+    def user_id(self, obj):
+        return obj.user.id
+    
+    user_id.short_description = 'User ID'
+    user_id.admin_order_field = 'user__id'
+    
+    
