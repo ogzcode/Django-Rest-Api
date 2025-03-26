@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance } from 'axios';
+import { getCRMToken } from './tokenConfig';
 
 export const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -9,10 +10,10 @@ export const api = axios.create({
 
 export const setupInterceptors = (api: AxiosInstance) => {
     api.interceptors.request.use(
-        (config) => {   
-            const token = localStorage.getItem('django-crm-token');
+        async (config) => {   
+            const token = await getCRMToken()
             if (token) {
-                config.headers.Authorization = `Bearer ${token}`;
+                config.headers.Authorization = `Bearer ${token.access}`;
             }
             return config;
         },
@@ -25,7 +26,7 @@ export const setupInterceptors = (api: AxiosInstance) => {
             return response;
         },
         (error) => {
-            if (error.response.status === 401) {
+            if (error.response?.status === 401 && window.location.pathname !== '/login') {
                 localStorage.removeItem('django-crm-token');
                 window.location.href = '/login';
             }
