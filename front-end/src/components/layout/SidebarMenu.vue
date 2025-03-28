@@ -9,7 +9,6 @@
           :isSubActive="isSubActive(item)"
           :isOpen="!!openSubMenus[item.key]"
           @toggle-submenu="(key) => toggleSubMenu(key, isCollapsed, updateSidebarOpen)"
-          @click="handleItemClick(item)"
         />
         
         <SidebarSubmenu
@@ -29,7 +28,6 @@
 import { useMenu } from '@/composables/useMenu'
 import SidebarMenuItem from './SidebarMenuItem.vue'
 import SidebarSubmenu from './SidebarSubmenu.vue'
-import { removeCRMToken } from '@/config/tokenConfig'
 import { useRouter } from 'vue-router'
 import { watch } from 'vue'
 
@@ -40,7 +38,7 @@ const props = defineProps<{
 const emit = defineEmits(['update:sidebarOpen'])
 
 const router = useRouter()
-const { menuItems, openSubMenus, toggleSubMenu, isActive, isSubActive, isSmallScreen, checkScreenSize } = useMenu()
+const { menuItems, openSubMenus, toggleSubMenu, isActive, isSubActive, isSmallScreen } = useMenu()
 
 // Route değiştiğinde mobil görünümde sidebar'ı kapat
 watch(() => router.currentRoute.value.path, (newPath) => {
@@ -52,14 +50,6 @@ watch(() => router.currentRoute.value.path, (newPath) => {
 // Sidebar open durumunu güncelleme fonksiyonu
 const updateSidebarOpen = (value: boolean) => {
   emit('update:sidebarOpen', value)
-}
-
-// Öğeye tıklandığında işlenecek fonksiyon
-const handleItemClick = async (item: any) => {
-  if (item.key === 'logout') {
-    await removeCRMToken()
-    router.push('/login')
-  }
 }
 </script>
 

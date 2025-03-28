@@ -16,12 +16,12 @@
         v-for="child in children" 
         :key="child.key"
         :to="child.path || ''"
-        class="flex items-center px-3 py-2 text-sm rounded-md transition-colors hover:bg-muted"
-        :class="isActive(child.path) ? 'bg-secondary text-foreground font-medium' : 'text-muted-foreground'"
+        class="flex items-center px-3 py-2 text-sm rounded-md transition-colors"
+        :class="isActive(child.path) ? 'bg-primary text-primary-foreground font-medium hover:bg-primary/80' : 'text-muted-foreground hover:bg-muted'"
         @keydown="handleKeyDown"
         tabindex="0"
       >
-        <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" v-html="child.icon" />
+        <component :is="getIcon(child.icon)" class="w-4 h-4 mr-3" />
         <span>{{ child.title }}</span>
       </router-link>
     </div>
@@ -29,7 +29,9 @@
 </template>
 
 <script setup lang="ts">
-import { MenuItem } from '@/composables/useMenu'
+import type { MenuItem } from '@/composables/useMenu'
+import * as LucideIcons from 'lucide-vue-next'
+import { computed, watch } from 'vue'
 
 const props = defineProps<{
   children: MenuItem[]
@@ -39,10 +41,25 @@ const props = defineProps<{
   isActive: (path?: string) => boolean
 }>()
 
+const emit = defineEmits(['update:hasActiveChild'])
+
+const hasActiveChild = computed(() => {
+  return props.children.some(child => props.isActive(child.path))
+})
+
+watch(hasActiveChild, (newValue) => {
+  emit('update:hasActiveChild', newValue)
+}, { immediate: true })
+
 const handleKeyDown = (event: KeyboardEvent) => {
   if (event.key === 'Enter' || event.key === ' ') {
     event.preventDefault()
-    event.target.click()
+    const target = event.target as HTMLElement
+    target.click()
   }
+}
+
+const getIcon = (iconName: string) => {
+  return (LucideIcons as Record<string, any>)[iconName]
 }
 </script> 
