@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { getCRMToken } from '@/config/tokenConfig'
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -13,8 +14,55 @@ const router = createRouter({
         },
         {
             path: '/',
-            component: () => import('@/views/main/Dashboard.vue'),
+            component: () => import('@/views/layout/Layout.vue'),
+            children: [
+                {
+                    path: '',
+                    component: () => import('@/views/main/Dashboard.vue'),
+                },
+                {
+                    path: 'users',
+                    component: () => import('@/views/main/Users.vue'),
+                },
+                {
+                    path: 'roles',
+                    component: () => import('@/views/main/Users.vue'), // Geçici olarak aynı component
+                },
+                {
+                    path: 'permissions',
+                    component: () => import('@/views/main/Users.vue'), // Geçici olarak aynı component
+                },
+                {
+                    path: 'settings',
+                    component: () => import('@/views/main/Settings.vue'),
+                },
+                {
+                    path: 'profile',
+                    component: () => import('@/views/main/Settings.vue'), // Geçici olarak aynı component
+                },
+                {
+                    path: 'reports',
+                    redirect: '/reports/daily',
+                },
+                {
+                    path: 'reports/daily',
+                    component: () => import('@/views/main/Dashboard.vue'), // Geçici olarak aynı component
+                },
+                {
+                    path: 'reports/weekly',
+                    component: () => import('@/views/main/Dashboard.vue'), // Geçici olarak aynı component
+                },
+                {
+                    path: 'reports/monthly',
+                    component: () => import('@/views/main/Dashboard.vue'), // Geçici olarak aynı component
+                }
+            ]
         },
+        // Catch-all 404 route
+        {
+            path: '/:pathMatch(.*)*',
+            redirect: '/'
+        }
     ],
 })
 
