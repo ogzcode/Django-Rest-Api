@@ -19,6 +19,9 @@ class TypeCreateView(generics.CreateAPIView):
     serializer_class = TypeSerializer
     permission_classes = [IsAuthenticated, IsOwnData]
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 @extend_schema(
     tags=["Type"],
     summary="Type Delete",
@@ -62,7 +65,7 @@ class TypeListView(generics.ListAPIView):
     permission_classes = [IsAuthenticated, IsOwnData]
 
     def get_queryset(self):
-        queryset = Type.objects.all()
+        queryset = Type.objects.filter(user=self.request.user)
         type_param = self.request.query_params.get('type')
         if type_param:
             queryset = queryset.filter(type=type_param)
