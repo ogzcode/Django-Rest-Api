@@ -6,3 +6,8 @@ class TypeSerializer(serializers.ModelSerializer):
         model = Type
         fields = '__all__'
 
+class TypeListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Type
+        fields = ['id', 'name', 'type']
+

@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
-from api.serializers import RegisterSerializer, RegisterResponseSerializer
+from api.serializers.auth import RegisterSerializer, RegisterResponseSerializer
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):

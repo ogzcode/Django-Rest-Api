@@ -1,6 +1,6 @@
 from rest_framework import generics
 from api.models import Type
-from api.serializers import TypeSerializer
+from api.serializers.type import TypeSerializer, TypeListSerializer
 from rest_framework.permissions import IsAuthenticated
 from drf_spectacular.utils import extend_schema
 from api.permissions import IsOwnData
@@ -50,7 +50,7 @@ class TypeUpdateView(generics.UpdateAPIView):
     tags=["Type"],
     summary="Type List",
     description="Type List",
-    responses={200: TypeSerializer(many=True)},
+    responses={200: TypeListSerializer(many=True)},
     parameters=[
         OpenApiParameter(
             name='type',
@@ -61,7 +61,7 @@ class TypeUpdateView(generics.UpdateAPIView):
     ]
 )
 class TypeListView(generics.ListAPIView):
-    serializer_class = TypeSerializer
+    serializer_class = TypeListSerializer
     permission_classes = [IsAuthenticated, IsOwnData]
 
     def get_queryset(self):
