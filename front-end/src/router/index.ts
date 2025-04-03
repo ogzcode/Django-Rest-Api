@@ -55,6 +55,10 @@ const router = createRouter({
                 {
                     path: 'reports/monthly',
                     component: () => import('@/views/main/Dashboard.vue'), // Geçici olarak aynı component
+                },
+                {
+                    path: 'settings/types',
+                    component: () => import('@/views/main/settings/type/TypeList.vue'),
                 }
             ]
         },

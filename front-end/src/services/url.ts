@@ -12,3 +12,11 @@ export const user = {
     delete: (id: number) => `${baseUrl}/users/delete/${id}`,
     company: (id: number) => `${baseUrl}/users/company/${id}`,
 }
+
+export const type = {
+    getAll: `${baseUrl}/types/`,
+    create: `${baseUrl}/types/create/`,
+    update: (id: number) => `${baseUrl}/types/update/${id}`,
+    delete: (id: number) => `${baseUrl}/types/delete/${id}`,
+}
+
