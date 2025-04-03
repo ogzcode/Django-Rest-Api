@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { getAllTypes } from '@/services/request/types';
 import { onMounted, ref } from 'vue';
-import type { Type } from './types';
+import type { Type } from './types.d.ts';
 import DataTable from '@/components/datatable/DataTable.vue';
 import DataTableAction from './components/DataTableAction.vue';
 import { useDataTableColumns } from '@/composables/useDataTableColumns';

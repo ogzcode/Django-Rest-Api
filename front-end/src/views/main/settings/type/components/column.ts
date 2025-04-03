@@ -1,20 +1,22 @@
 import type { ColumnData } from "@/components/datatable/columnCreator";
+import { typeEnum } from "../types.ts";
+import type { TypeEnum } from "../types.ts";
+import Badge from "@/components/ui/badge/Badge.vue";
+import { h } from "vue";
 
 export const columnData: ColumnData[] = [
     {
-        columnName: "id",
-        columnTitle: "ID",
-        element: ({ getValue }: { getValue: () => any }) => getValue()
-    },
-    {
         columnName: "name",
-        columnTitle: "Name",
+        columnTitle: "İsim",
         element: ({ getValue }: { getValue: () => any }) => getValue()
     },
     {
         columnName: "type",
-        columnTitle: "Type",
-        element: ({ getValue }: { getValue: () => any }) => getValue()
+        columnTitle: "Tip",
+        element: ({ getValue }: { getValue: () => TypeEnum }) => {
+            const type = getValue();
+            return h(Badge, { class: typeEnum.find(t => t.value === type)?.color }, typeEnum.find(t => t.value === type)?.label);
+        }
     }
 ];
 
