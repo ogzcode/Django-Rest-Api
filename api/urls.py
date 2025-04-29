@@ -2,7 +2,7 @@ from django.urls import path
 from .views.auth import CustomTokenObtainPairView, CustomTokenRefreshView, RegisterView
 from .views.users import UserDetailAPIView, UserUpdateAPIView, UserDeleteAPIView, UserCompanyAPIView
 from .views.type import TypeCreateView, TypeDeleteView, TypeUpdateView, TypeListView
-
+from .views.product import ProductCreateView, ProductDeleteView, ProductUpdateView, ProductListView
 urlpatterns = [
     # User
     path('users/<int:pk>', UserDetailAPIView.as_view(), name='user-detail'),
@@ -20,4 +20,10 @@ urlpatterns = [
     path('types/create/', TypeCreateView.as_view(), name='type-create'),
     path('types/delete/<int:pk>', TypeDeleteView.as_view(), name='type-delete'),
     path('types/update/<int:pk>', TypeUpdateView.as_view(), name='type-update'),
+
+    # Product
+    path('products/', ProductListView.as_view(), name='product-list'),
+    path('products/create/', ProductCreateView.as_view(), name='product-create'),
+    path('products/delete/<int:pk>', ProductDeleteView.as_view(), name='product-delete'),
+    path('products/update/<int:pk>', ProductUpdateView.as_view(), name='product-update'),
 ]
